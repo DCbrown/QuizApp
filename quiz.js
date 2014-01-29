@@ -12,6 +12,8 @@ var selectedAnswer = "";
 var score = 0;
 var questions = new Array();
 
+
+//list of questions
 function Question(currentQuestion,answers,correct) {
 	this.currentQuestion = currentQuestion;
 	this.answers = answers;
@@ -30,12 +32,13 @@ questions [8] = new Question ("In Megaman X after finding all the upgrades and b
 questions [9] = new Question ("What Mario game did the Tanooki suit made it's first appearance?",["Super Mario Bros. 3", "Super Mario World", "Super Mario Land 3D", "Super Mario RPG", "Mario Kart 7"], 0);
 
 
-// questions appear
+//questions appear
 function generateQuestions() {
 var q = questions [currentQuestion].currentQuestion;
 $('#heading').append('<h4>' + q + '</h4>').hide().delay(1200).fadeIn('slow');
 }
 
+//answers appear
 function generateAnswers(){
 var write = "";
 var a1 = questions [currentQuestion].answers;
@@ -45,7 +48,7 @@ for (var i = 0; i < a1.length; i++) {
 $("#answers").append(write).hide().delay(1200).fadeIn('slow');
 }
 
-// Radio button being clicked
+//radio button being clicked
 function submit(){
 $('.option').click(function() {
    if($("input[type='radio'][name='radio']").is(':checked')) { 
@@ -55,7 +58,7 @@ $('.option').click(function() {
 });
 }
 
-// Evaluate answer 
+//evaluate answer 
 function evaluation() {
 var selected = $("input[type='radio'][name='radio']:checked");
 	if (selected.length >= 0) {
@@ -79,6 +82,7 @@ var selected = $("input[type='radio'][name='radio']:checked");
 	}
 }
 
+//next question 
 function nextQuestion() {
  	$("#next").click(function() {
 		$('h4').remove();
@@ -100,6 +104,7 @@ else {
 
 }
 
+//set score
 function playerScore() {
 	$('#score p').remove();
 	score++;
@@ -107,17 +112,20 @@ function playerScore() {
 
 }
 
+//question marker
 function questionNumber() {
 	$('#question p').remove();
 	$('#question').append(" " + '<p>' + (currentQuestion +1) + '/10</p>');
 }
 
+//final tally
 function complete() {
 	$('.status').hide();
 	$('#heading').append("<h4>You scored" + " " + score + " " + "out of 10 <br>" + "<div class='restart'><p>Restart</p></div></h4>").hide().fadeIn('400');
 	$('.restart').addClass('quiz-end');
 }
 
+//restart button
 function restart() {
 	$('.restart').click(function() {
 		$('.restart').removeClass('quiz-end');
